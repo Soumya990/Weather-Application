@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudtium</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+<body>
+    <div class="main lg:border-2 lg:border-black lg:w-full lg:pl-8">
+        <div class="container lg:pb-0 md:pb-0 lg:w-full">
+            <div class="header flex h-16 items-center justify-between md:px-10 border bg-zinc-600">
+                <h2 class="text-xl text-yellow-50 flex items-center md:gap-2 ml-2">Cloudtium <img src="./media/clouds.png" alt="" class="h-9"></h2>
+                <div class="weather-input flex w-fit">
+                    <input type="text" name="city" list="cityname" class="h-10 rounded-lg w-24 px-1 md:px-2 md:w-40" id="city_input">
+                    <datalist id="cityname">
+                        <option value="Boston"></option>
+                        <option value="Cambridge"></option>
+                    </datalist>
+                    <button type="button" id="searchBtn" class="flex items-center border-solid border-2 border-white h-10 rounded-xl md:p-2 bg-slate-200 md:ml-10 p-2 ml-2">
+                        <img src="./media/magnifying-glass.png" alt="" class="h-8 w-8">
+                        <p class="hidden md:block">Search</p>
+                    </button>
+                    <button type="button" id="locationBtn" class="flex items-center border-solid border-2 border-white h-10 rounded-xl p-2 bg-slate-200 ml-2 mr-2">
+                        <img src="./media/crosshair.png" alt="" class="h-8 w-8 mr-2">
+                        <p class="hidden md:block">Current Location</p>
+                    </button>
+                </div>
+            </div>
+            <div class="sub-container border-2 md:flex">
+                <div class="weather-left pt-3 px-2 bg-zinc-400 border border-white pb-3">
+                    <div class="weather-card w-full md:w-60 border border-black rounded-xl p-5 bg-slate-400">
+                        <div class="current-weather flex justify-evenly">
+                            <div class="details">
+                                <p>Now</p>
+                                <h1 class="text-3xl">___&deg;C</h1>
+                                <p>___</p>
+                            </div>
+                            <div class="weather-icon">
+                                <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="">
+                            </div>
+                        </div>
+                        <hr class="border mb-2">
+                        <div class="card-footer items-center">
+                            <p class="ml-3 flex gap-2"><img src="./media/calendar.png" alt="" class="h-5">____</p>
+                            <p class="ml-3 flex gap-2"><img src="./media/location.png" alt="" class="w-5">____</p>
+                        </div>
+                    </div>
+                    <div class="weather-bar w-full md:w-60 border border-black rounded-xl flex flex-col justify-evenly h-80 p-1 mt-4 bg-slate-400">
+                        <h2 class="text-lg text-center">5 Days Forecast</h2>
+                        <div class="day flex justify-around">
+                            <img src="https://openweathermap.org/img/wn/02d.png" alt="" class="h-11 w-11">
+                            <span class="flex">
+                                <p>___</p>
+                                &deg;C
+                            </span>
+                            <p>___</p>
+                            <p>___</p>
+                        </div>
+                        <div class="day flex justify-around">
+                            <img src="https://openweathermap.org/img/wn/02d.png" alt="" class="h-10 w-10">
+                            <span class="flex">
+                                <p>___</p>
+                                &deg;C
+                            </span>
+                            <p>___</p>
+                            <p>___</p>
+                        </div>
+                        <div class="day flex justify-around">
+                            <img src="https://openweathermap.org/img/wn/02d.png" alt="" class="h-10 w-10">
+                            <span class="flex">
+                                <p>___</p>
+                                &deg;C
+                            </span>
+                            <p>___</p>
+                            <p>___</p>
+                        </div>
+                        <div class="day flex justify-around">
+                            <img src="https://openweathermap.org/img/wn/02d.png" alt="" class="h-10 w-10">
+                            <span class="flex">
+                                <p>___</p>
+                                &deg;C
+                            </span>
+                            <p>___</p>
+                            <p>___</p>
+                        </div>
+                        <div class="day flex justify-around">
+                            <img src="https://openweathermap.org/img/wn/02d.png" alt="" class="h-10 w-10">
+                            <span class="flex">
+                                <p>___</p>
+                                &deg;C
+                            </span>
+                            <p>___</p>
+                            <p>___</p>
+                        </div>
+                    </div>
+                    <div id="loadingBtn" class="border-2 border-white bg-slate-200 rounded-lg py-1 mt-4 flex justify-center cursor-pointer" onclick="reloadPage()">
+                        <h2 class="text-lg">Reload</h2>
+                    </div>
+                </div>
+                <div class="weather-right border w-full px-2 bg-gray-700 pb-3">
+                    <div class="highlight">
+                        <h2 class="text-xl mt-1 mb-2 text-white">Today's Highlights</h2>
+                    </div>
+                    <div class="air-sun grid md:grid-cols-2 gap-2">
+                        <div class="air border border-black rounded-xl bg-white pb-2">
+                            <div class="card w-full">
+                                <div class="card-head flex items-center justify-around p-1">
+                                    <p>Air Quality Index</p>
+                                    <p class="px-2 rounded-md bg-red-500 text-white w-fit" id="air-index">Good</p>
+                                </div>
+                                <hr class="pt-2 border-black">
+                                <div class="items grid grid-cols-3 px-8 md:grid-cols-2 md:px-2 md:ml-5 lg:grid-cols-4 lg:px-12">
+                                    <div class="img-item">
+                                        <img src="./media/wind.png" alt="" class="h-14">
+                                    </div>
+                                    <div class="item">
+                                        <p>PM2.5</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>PM10</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>SO2</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>CO</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>NO</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>NO2</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>NH3</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                    <div class="item">
+                                        <p>O3</p>
+                                        <h2>__________</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sun h-fit border border-black rounded-xl pt-1 px-5 py-20 bg-white">
+                            <div class="card-head">
+                                <p>Sunrise & Sunset</p>
+                            </div>
+                            <div class="card flex gap-10 justify-evenly mt-6 md:flex sm:flex-wrap">
+                                <div class="sunrise flex gap-5 items-center">
+                                    <img src="./media/sunrise.png" alt="" class="h-16">
+                                    <div class="sr-info">
+                                        <p class="text-red-600">Sunrise</p>
+                                        <p class="text-2xl">__________</p>
+                                    </div>
+                                </div>
+                                <div class="sunset flex gap-5 items-center">
+                                    <img src="./media/sunset.png" alt="" class="h-14">
+                                    <div class="ss-info">
+                                        <p class="text-red-600">Sunset</p>
+                                        <p class="text-2xl">__________</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ats-info w-full grid grid-cols-3 lg:grid-cols-4 gap-2 mt-2">
+                        <div class="info-card border border-black rounded-xl pt-2 px-2 py-2 bg-white">
+                            <div class="c-head mb-2">
+                                <p>Humidity</p>
+                            </div>
+                            <div class="c-body px-3 md:flex md:items-end md:justify-between">
+                                <img src="./media/water-droplet.png" alt="" class="h-10">
+                                <h2 class="md:text-2xl sm:text-sm" id="humidity">__________%</h2>
+                            </div>
+                        </div>
+                        <div class="info-card border border-black rounded-xl pt-2 px-2 py-2 bg-white">
+                            <div class="c-head mb-2">
+                                <p>Pressure</p>
+                            </div>
+                            <div class="c-body px-3 md:flex md:items-end md:justify-between">
+                                <img src="./media/compass.png" alt="" class="h-10">
+                                <h2 class="md:text-2xl sm:text-sm" id="pressure">__________hPa</h2>
+                            </div>
+                        </div>
+                        <div class="info-card border border-black rounded-xl pt-2 px-2 py-2 bg-white">
+                            <div class="c-head mb-2">
+                                <p>Visibility</p>
+                            </div>
+                            <div class="c-body px-3 md:flex md:items-end md:justify-between">
+                                <img src="./media/view.png" alt="" class="h-10">
+                                <h2 class="md:text-2xl" id="visibility">__________km</h2>
+                            </div>
+                        </div>
+                        <div class="info-card border border-black rounded-xl pt-2 px-2 py-2 bg-white">
+                            <div class="c-head mb-2">
+                                <p>Wind Speed</p>
+                            </div>
+                            <div class="c-body px-3 md:flex md:items-end md:justify-between">
+                                <img src="./media/top-right.png" alt="" class="h-10">
+                                <h2 class="md:text-2xl" id="wind-speed">__________m/s</h2>
+                            </div>
+                        </div>
+                        <div class="info-card border border-black rounded-xl pt-2 px-2 py-2 bg-white">
+                            <div class="c-head mb-2">
+                                <p>Feels Like</p>
+                            </div>
+                            <div class="c-body px-3 md:flex md:items-end md:justify-between">
+                                <img src="./media/thermometer.png" alt="" class="h-10">
+                                <h2 class="md:text-2xl" id="feels-like">__________&deg;C</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hourly-forecast lg:pb-0">
+                        <div class="card-head">
+                            <h2 class="text-lg mb-2 mt-2 text-white">Today at: </h2>
+                        </div>
+                        <div class="boxes grid grid-cols-4 md:grid-cols-4 gap-2 lg:grid-cols-8">
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                            <div class="box border border-black rounded-lg p-3 flex flex-col items-center bg-slate-400">
+                                <p>9 AM</p>
+                                <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                                <p>____&deg;C</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
